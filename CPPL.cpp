@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CPPL.cpp
-// Author      : Shubham Tyagi
-// Version     :
+// Author      : Group 4
+// Version     : 1.0.1.5
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
 //============================================================================
@@ -32,7 +32,7 @@ public:
 	void getInput(int dataSize); //Extra utility function to input data manually into the file.
 	void findConnections(vector<vector<int> > base);
 	void showNetwork(vector<vector<int> > base, int size);
-	bool areFollowers(unsigned roll_num_1, unsigned roll_num_2, vector<vector<int> >base);
+	bool areFollowers(unsigned roll_num_1, unsigned roll_num_2, vector<vector<int> >base); //**depriciated
 	vector<int> commonLinks(unsigned roll_num_1, unsigned roll_num_2, vector<vector<int> >base);
 	void findFollowers( vector<vector<int> >base);
 	void setFollowerslist(vector<vector<int> > base, int dataStackSize); // set the followers for a student.
@@ -40,19 +40,19 @@ public:
 	void noConnecttionFound(int roll_num_1, int roll_num_2); // if not connection found.
 	void printAllLinks(int roll_num_1, int roll_num_2, int dataStackSize); // print found links, modified BFS algorithm.
 	void findRoute(int src, int dest, bool visits[], int link[], int &index, int dataStackSize); // initilizer for findRoute(...)
-    void followEachOther(vector<vector<int> >base);
-    void followedByBoth(int roll_num_1,int roll_num_2, vector<vector<int> >base);
-    void followBoth(int roll_num_1, int roll_num_2,vector<vector<int> > base);
-    int CountFollowers(vector<vector<int> > base, int roll_num);
-    void findMaxFollowers(vector<vector<int> > base, int dataStackSize);
-    void saveFollowerCount(vector<vector<int> > base, int dataStackSize);
+    	void followEachOther(vector<vector<int> >base);
+   	void followedByBoth(int roll_num_1,int roll_num_2, vector<vector<int> >base);
+    	void followBoth(int roll_num_1, int roll_num_2,vector<vector<int> > base);
+   	int CountFollowers(vector<vector<int> > base, int roll_num);
+    	void findMaxFollowers(vector<vector<int> > base, int dataStackSize);
+    	void saveFollowerCount(vector<vector<int> > base, int dataStackSize);
 
 
     //void maxFollowers(vector<vector<int> >base);
     //int firstIndex(int arr[],int low, int high);
     //int colWith1s(vector<vector<int> >base);
     };
-/*
+
 int firstIndex(int arr[], int low, int high)
 {
     if(high >= low)
@@ -69,8 +69,8 @@ int firstIndex(int arr[], int low, int high)
   }
   return -1;
 }
-*/
-/*
+
+
 int colWith1s(vector<vector<int> >base)
 {
     int maxColIndex = 0, max = -1;
@@ -87,7 +87,7 @@ int colWith1s(vector<vector<int> >base)
 
     return (maxColIndex);
 }
-*/
+
 void InstaNetwork::getInput(int dataStackSize){
 
 		int flag =0, bitCount=0;
@@ -122,8 +122,7 @@ void InstaNetwork::getInput(int dataStackSize){
 					flag = 1;
 					break;
 				}
-
-			}
+			  }
 
 			if(flag == 0 && bitCount == dataStackSize)
 				file1<<line<<endl;
@@ -131,14 +130,10 @@ void InstaNetwork::getInput(int dataStackSize){
 				cout<<"Error in Input!!"<<endl;
 				break;
 			}
-
+		     }
 		}
-		}
-
-		file1.close();
-
-
-}
+			file1.close();
+	}
 
 // @Params : int, int, bool *, int *, int
 //
@@ -193,9 +188,6 @@ void InstaNetwork::printAllLinks(int roll_num_1, int roll_num_2, int dataStackSi
 		visits[i] = false;
 
 	findRoute(roll_num_1, roll_num_2, visits, link, index, dataStackSize);
-
-
-
 }
 // @Params : int, int
 // if no connections between the students is found print status.
@@ -208,7 +200,7 @@ bool InstaNetwork::linked(int roll_num_1, int roll_num_2, int dataStackSize){
 
 	// basic BFS algorithm for testing connectivity b/w roll_num_2 and roll_num_1
 	if(roll_num_1 == roll_num_2 )
-		return true;
+	return true;
 
 	bool *visits = new bool[dataStackSize];
 	// set all nodes to be unvisited.
@@ -231,9 +223,8 @@ bool InstaNetwork::linked(int roll_num_1, int roll_num_2, int dataStackSize){
 		// then return true else mark the un-visited entries, visited and move them to the
 		// queue.
 		for(itr = followers[front].begin(); itr != followers[front].end() ; ++itr ){
-
 			if(*itr == roll_num_2)
-				return true;
+			return true;
 
 			if(!visits[*itr]){
 				visits[*itr] = true;
@@ -241,8 +232,6 @@ bool InstaNetwork::linked(int roll_num_1, int roll_num_2, int dataStackSize){
 			}
 		}
 	}
-
-
 	return false;
 }
 
@@ -254,15 +243,14 @@ void InstaNetwork::setFollowerslist(vector<vector<int> >base, int dataStackSize)
 	for(unsigned i=0; i<base.size(); i++)
 		for(unsigned j=0; j<base[i].size(); j++)
 			if(base.at(i).at(j)==1)
-				followers[i].push_back(j);
+			followers[i].push_back(j);
 
 }
 
 // @Params : null
 //	Loads the network details from external file to program context.
 vector<vector<int> > InstaNetwork::loadNetwork(int dataStackSize){
-
-
+	
 	int bitCount=0, flag=0;
 	vector< vector<int> > base;
 	file.open("DataFile.csv");
@@ -270,27 +258,23 @@ vector<vector<int> > InstaNetwork::loadNetwork(int dataStackSize){
 	//initialising []base by 0
 
 	cin.ignore();
-for(int i=0; i< dataStackSize ; i++){
+	for(int i=0; i< dataStackSize ; i++){
+	   
+	   int bit_;
+    	   vector<int> v;
+	   bitCount=0;
+	   getline(file,line);
+		
+	    size_t f = line.find_first_not_of("01,");
 
-    int bit_;
-    vector<int> v;
-	bitCount=0;
-	getline(file,line);
-
-
-
-
-    size_t f = line.find_first_not_of("01,");
-
-    if (f!=string::npos){
+    	if (f!=string::npos){
     	//illegeal character not found!
     	flag=1;
     	file.close();
     	error = true;
     	break;
-
-    	}
-    else{
+}
+  else{
     	string bit;
     	stringstream linestream(line);
     	while(getline(linestream,bit,',')){
@@ -311,7 +295,6 @@ for(int i=0; i< dataStackSize ; i++){
     		error = true;
 
     	}
-
 }
 
 }
@@ -331,26 +314,21 @@ void InstaNetwork::showNetwork(vector<vector<int> > base, int size){
 	cout<<endl;
 	cout<< "      ";
 
-
 	for(i=0;i<size;i++)
-			cout<<"---";
-
+		cout<<"---";
 	cout<<endl;
-
-
-
+	
 	for(unsigned i=0;i<base.size();i++){
+	   if(i+1 >= 10)
+		cout << i+1<<"|"<<"   ";
+	   else
+		cout<<i+1<<" |"<<"   ";
 
-		if(i+1 >= 10)
-			cout << i+1<<"|"<<"   ";
-		else
-			cout<<i+1<<" |"<<"   ";
-
-		for( unsigned j=0;j<base[i].size();j++){
-			cout<<base[i][j]<<"  ";
-		}
-		cout<<endl;
+	    for( unsigned j=0;j<base[i].size();j++){
+		cout<<base[i][j]<<"  ";
 	}
+		cout<<endl;
+     }
 	cout<<endl<<endl;
 }
 
@@ -365,8 +343,7 @@ bool InstaNetwork::areFollowers(unsigned roll_num_1, unsigned roll_num_2, vector
 
 	if(base.at(roll_num_1 -1).at(roll_num_2 -1) == 1 && base.at(roll_num_2 -1).at(roll_num_1 -1) == 1)
 		return true;
-
-
+	
 	return false;
 }
 
@@ -375,7 +352,7 @@ void InstaNetwork::followEachOther(vector<vector<int> >base)
     int i,j;
      for(i=0;i<base.size();i++){
         for(j=i+1;j<base[i].size();j++){
-            if(base[j][i]==1&&base[i][j]==1)
+            if(base[j][i] ==1 && base[i][j] == 1)
                 cout<<i+1<<" and "<<j+1<<" follow each other"<<endl;
         }
     }
@@ -383,31 +360,32 @@ void InstaNetwork::followEachOther(vector<vector<int> >base)
 void InstaNetwork::followedByBoth(int roll_num_1,int roll_num_2,vector<vector<int> > base)
 {
     int j,flag=0;
-    for(j=0;j<base.size();j++){
-        if(roll_num_1==roll_num_2){
+    for(j=0; j<base.size(); j++){
+        if(roll_num_1 == roll_num_2){
             cout<<"No one can be followed by himself \n";
             break;
         }
-        else if(base[roll_num_1-1][j]==1&&base[roll_num_2-1][j]==1){
+        else if(base[roll_num_1-1][j] == 1 && base[roll_num_2-1][j]==1){
             cout<<j+1<<",";
             flag=1;
         }
 
     }
     cout<<" followed by both "<<roll_num_1<<" and "<<roll_num_2<<endl;
-    if(flag!=1)
+    
+	if(flag != 1)
         cout<<"No one is followed by both of them \n";
 }
 
 void InstaNetwork::followBoth(int roll_num_1, int roll_num_2,vector<vector<int> > base)
 {
     int i,flag=0;
-    for(i=0;i<base.size();i++){
-        if(roll_num_1==roll_num_2){
+    for(i = 0; i < base.size(); i++){
+        if(roll_num_1 == roll_num_2){
             cout<<"No one can follow himself \n";
             break;
         }
-        else if(base[i][roll_num_1-1]==1&&base[i][roll_num_2-1]==1){
+        else if(base[i][roll_num_1-1] == 1 && base[i][roll_num_2-1] == 1){
             cout<<i+1<<",";
             flag=1;
         }
@@ -420,43 +398,34 @@ void InstaNetwork::followBoth(int roll_num_1, int roll_num_2,vector<vector<int> 
 // @Params : unsigned, vector[2D]
 //		will return all the followers of a student.
 
-/*void InstaNetwork::maxFollowers( vector<vector<int> >base)
+void InstaNetwork::maxFollowers( vector<vector<int> >base)
 {
-
-
-
-
 //function to count the row with maximum 1
-
 
     int i,j;
     vector<vector<int> >base2;
     //making rows into columns
-        for(i=0;i<base.size();i++){
-            for(j=0;j<base[i].size();j++){
+        for(i=0;i<base.size();i++)
+            for(j=0;j<base[i].size();j++)
+		   base2[j][i]=base[i][j];
 
-                base2[j][i]=base[i][j];
+     cout<<"Student with max followers is " << colWith1s(base2);*/
+}
 
-               }
-
-        }
-        cout<<"Student with max followers is " << colWith1s(base2);*/
-
-/*void InstaNetwork::findConnections(vector<vector<int> > base){
+void InstaNetwork::findConnections(vector<vector<int> > base){
 	for(unsigned i=0; i<base[roll_num].size(); i++){
 		if(base.at(roll_num).at(i)==1)
 			followers.push_back(i);
 	}
-}*/
+}
 
 
 int InstaNetwork::CountFollowers(vector<vector<int> > base, int roll_num){
         int count_ = 0;
-		for(unsigned j = 0; j<base.size() ; j++ )
-			if(base.at(roll_num).at(j) ==1)
-				count_++;
-
-
+	for(unsigned j = 0; j<base.size() ; j++ )
+		if(base.at(roll_num).at(j) ==1)
+		count_++;
+	
 	return count_;
 }
 
@@ -472,34 +441,32 @@ void InstaNetwork::findMaxFollowers(vector<vector<int> > base, int dataStackSize
 	saveFollowerCount(base, dataStackSize);
 	int *roll_arr = new int[50];
 	int max_f = 0, j=0;
-/*
+	
 	for(unsigned i=0;i<dataStackSize; i++){
 			if(followerCount[i] >= max_f)
 				roll_arr[j] = i+1;
 			j++;
 	}
-*/
-	for(unsigned i=0; i<2 ; i++)
-		cout<<"Roll #"<<i+27<<" has Max Fllowers i.e "<<35<<endl;
-
+	
+	for(unsigned i =0 ; i < j ; i++)
+		cout<<"Roll #"<<roll_arr[i]<<" has maximum followers i.e "<<followerCount[roll_arr[i]-1]<<endl; 
 }
 
 int main() {
- //functoo();
+
 	InstaNetwork network;
 	unsigned roll_num_1,
 	roll_num_2,
 	dataStackSize;
 	int choice,i,j;
 	char ch;
-    cout<<"\n\n"<<"\t\t\t\t\t===========Welcome to the Instagram Network===========\n";
+
+	cout<<"\n\n"<<"\t\t\t\t\t===========Welcome to the Instagram Network===========\n";
 	cout<<"  \n Enter Total Number of students in the Network! ";
 	cin>>dataStackSize;
 
 	//network.getInput(dataStackSize);
-
-
-
+	
 	vector<vector<int> > base = network.loadNetwork(dataStackSize);
 	if(!network.isErrorInInput()){
 	network.showNetwork(base, dataStackSize);
@@ -509,8 +476,7 @@ int main() {
 
 
 	network.setFollowerslist(base, dataStackSize);
-   //cout<<"Hello";
-
+   
     do{
         cout<<"\n\n\tWant do u want to know about from this network ?\n";
         cout<<"1. Students who follow each other \n";
@@ -521,27 +487,27 @@ int main() {
         cout<<"6. Exit out of the program \n";
         cout<<"Enter your choice\n";
         cin>>choice;
-    if(choice==2||choice==3||choice==4){
+   
+	if(choice==2||choice==3||choice==4){
             cout<<"Hello";
-	while(true){
-		cout<<"Enter two roll numbers!"<<endl;
-		cin >> roll_num_1 >> roll_num_2;
+	
+		while(true){
+		   cout<<"Enter two roll numbers!"<<endl;
+		   cin >> roll_num_1 >> roll_num_2;
 
-		if(roll_num_1>dataStackSize || roll_num_2>dataStackSize || roll_num_1==0 ||roll_num_2==0){
+		if(roll_num_1 > dataStackSize || roll_num_2 > dataStackSize || roll_num_1 == 0 || roll_num_2 == 0)
 			cout<<"Invalid Roll numbers "<<endl;
-		}
+		
 		else break;
 	}
     }
 
-	/*=============================================*/
 	if(choice==1){
         network.followEachOther(base);
     }
 	if(choice==2){
 	if(network.areFollowers(roll_num_1, roll_num_2, base))
 		cout<< "Roll no "<< roll_num_1<< " and "<< "Roll no "<< roll_num_2<< " follow each other!!";
-
 
 	else{
         cout<<"Here"<<endl;
@@ -552,25 +518,27 @@ int main() {
 		else{
                 cout<<"Here2"<<endl;
 			network.noConnecttionFound(roll_num_1, roll_num_2);
-	}}
 	}
-	else if(choice==3){
+     }
+  }
+	else if(choice==3)
         network.followedByBoth(roll_num_1,roll_num_2,base);
-    }
-    else if(choice==4){
+    
+    else if(choice==4)
         network.followBoth(roll_num_1,roll_num_2,base);
-    }
+    
     else if(choice==5)
-    {
-        network.findMaxFollowers(base, dataStackSize);
-        }
-           //network.maxFollowers(base);
-
+    	 network.findMaxFollowers(base, dataStackSize);
+   
     else if(choice==6)
-        exit(0);
-    cout<<"\nDo you want to continue ?? (Y/N)";
+       	 exit(0);
+    
+	    cout<<"\nDo you want to continue ?? (Y/N)";
     cin>>ch;
     }while(ch=='y'||ch=='Y');
-	}else cout<<"Error in input!!"<<endl;
+ }
+	else 
+	    cout<<"Error in input!!"<<endl;
+	
 	return 0;
 }
