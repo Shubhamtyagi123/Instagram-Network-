@@ -2,8 +2,8 @@
 // Name        : CPPL.cpp
 // Author      : Group 4
 // Version     : 1.0.1.5
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
+// Copyright   : --------
+// Description : Instagram Network Demo
 //============================================================================
 
 #include <iostream>
