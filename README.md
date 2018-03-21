@@ -1,4 +1,4 @@
-# OPP-Assignment
+# Simple Instagram Network using C++
 
 OOPS using C++ assignment
 
